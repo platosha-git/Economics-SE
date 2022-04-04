@@ -75,18 +75,6 @@ class MainWindow(QDialog):
         self.ui.classicTable.setItem(5, 1, QTableWidgetItem(str(round(tm_clean, 2))))
         self.ui.classicTable.setItem(6, 1, QTableWidgetItem(str(round(tm, 2))))
 
-    def plot_bar(self):
-        y = []
-        for i in range(5):
-            t = round(float(self.ui.classicTable.item(i, 1).text()))
-            for j in range(t):
-                y.append(round(round(float(self.ui.classicTable.item(i, 0).text())) / t))
-
-        x = [i + 1 for i in range(len(y))]
-
-        plt.bar(x, y)
-        plt.show()
-
 
     def eaf(self):
         RELY = ATTRIBUTES['RELY'][self.RELY.currentIndex()]
@@ -108,25 +96,18 @@ class MainWindow(QDialog):
         return RELY * DATA * CPLX * TIME * STOR * VIRT * TURN * ACAP * AEXP * PCAP * VEXP * LEXP * MODP * TOOL * SCED
 
 
-    def PM(self):
-        mode = self.type.currentIndex()
-        size = float(self.size.text())
-        return TYPE['C1'][mode] * self.eaf() * (size ** TYPE['p1'][mode])
-
-
-    def TM(self):
-        mode = self.type.currentIndex()
-        return TYPE['C2'][mode] * (self.PM() ** TYPE['p2'][mode])
-
-
     def calculate_project(self):
         try:
-            float(self.size.text())
+            mode = self.type.currentIndex()
+            size = float(self.size.text())
         except:
             return
 
-        pm_clean = round(self.PM(), 2)
-        tm_clean = round(self.TM(), 2)
+        PM = TYPE['C1'][mode] * self.eaf() * (size ** TYPE['p1'][mode])
+        TM = TYPE['C2'][mode] * (PM ** TYPE['p2'][mode])
+
+        pm_clean = round(PM, 2)
+        tm_clean = round(TM, 2)
         pm = round(pm_clean * 1.08, 2)
         tm = round(tm_clean * 1.36, 2)
 
@@ -134,11 +115,15 @@ class MainWindow(QDialog):
         self.ui.tmLabel.setText(f'Время: {tm}')
 
         self.fill_table(pm, tm, pm_clean, tm_clean)
-        self.plot_bar()
+
+
+    @pyqtSlot(name="on_barButton_clicked")
+    def bar_clicked(self):
+        plot_bar(self.ui.classicTable)    
 
 
     @pyqtSlot(name="on_task1Button_clicked")
-    def calculate_task1(self):
+    def task_clicked(self):
         #plot(0)
         #plot(2)
         plot(4)

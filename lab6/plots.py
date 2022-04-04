@@ -12,6 +12,20 @@ def TM(C2, p2, PM):
 def calc_EAF(params: list):
     return np.prod(params)
 
+
+def plot_bar(table):
+    y = []
+    for i in range(5):
+        t = round(float(table.item(i, 1).text()))
+        for j in range(t):
+            y.append(round(round(float(table.item(i, 0).text())) / t))
+
+    x = [i + 1 for i in range(len(y))]
+
+    plt.bar(x, y)
+    plt.show()
+
+
 def plot(cplx):
     for t in range(3):
         y_acap_pm = []
