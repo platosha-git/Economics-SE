@@ -1,31 +1,27 @@
 import sys, os
-from matplotlib import pyplot as plt
 import numpy as np
-from parameters import params_table, TYPE
+from matplotlib import pyplot as plt
+from parameters import TYPE, ATTRIBUTES
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QDialog, QHeaderView, QTableWidgetItem
 
-def PM(c1, p1, EAF, SIZE):
+
+#Обычный вариант
+def PM(C1, p1, EAF, SIZE):
     return 3.2 * EAF * (SIZE ** 1.05)
 
-def TM(c2, p2, PM):
+def TM(C2, p2, PM):
     return 2.5 * (PM ** 0.38)
 
 def calc_EAF(params: list):
     return np.prod(params)
 
-def resource_path(relative_path):
-    if getattr(sys, 'frozen', False):
-        base_path = sys._MEIPASS
-    else:
-        base_path = os.getcwd()
-    return os.path.join(base_path, relative_path)
 
 class MainWindow(QDialog):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.ui = uic.loadUi(resource_path('lab6.ui'), self)
+        self.ui = uic.loadUi('./lab6.ui', self)
 
         self.RELY: QComboBox = self.ui.comboBox_1
         self.DATA: QComboBox = self.ui.comboBox_2
@@ -71,34 +67,33 @@ class MainWindow(QDialog):
         self.calculate_project()
 
     def eaf(self):
-        RELY = params_table['RELY'][self.RELY.currentIndex()]
-        DATA = params_table['DATA'][self.DATA.currentIndex()]
-        CPLX = params_table['CPLX'][self.CPLX.currentIndex()]
-        TIME = params_table['TIME'][self.TIME.currentIndex()]
-        STOR = params_table['STOR'][self.STOR.currentIndex()]
-        VIRT = params_table['VIRT'][self.VIRT.currentIndex()]
-        TURN = params_table['TURN'][self.TURN.currentIndex()]
-        ACAP = params_table['ACAP'][self.ACAP.currentIndex()]
-        AEXP = params_table['AEXP'][self.AEXP.currentIndex()]
-        PCAP = params_table['PCAP'][self.PCAP.currentIndex()]
-        VEXP = params_table['VEXP'][self.VEXP.currentIndex()]
-        LEXP = params_table['LEXP'][self.LEXP.currentIndex()]
-        MODP = params_table['MODP'][self.MODP.currentIndex()]
-        TOOL = params_table['TOOL'][self.TOOL.currentIndex()]
-        SCED = params_table['SCED'][self.SCED.currentIndex()]
+        RELY = ATTRIBUTES['RELY'][self.RELY.currentIndex()]
+        DATA = ATTRIBUTES['DATA'][self.DATA.currentIndex()]
+        CPLX = ATTRIBUTES['CPLX'][self.CPLX.currentIndex()]
+        TIME = ATTRIBUTES['TIME'][self.TIME.currentIndex()]
+        STOR = ATTRIBUTES['STOR'][self.STOR.currentIndex()]
+        VIRT = ATTRIBUTES['VIRT'][self.VIRT.currentIndex()]
+        TURN = ATTRIBUTES['TURN'][self.TURN.currentIndex()]
+        ACAP = ATTRIBUTES['ACAP'][self.ACAP.currentIndex()]
+        AEXP = ATTRIBUTES['AEXP'][self.AEXP.currentIndex()]
+        PCAP = ATTRIBUTES['PCAP'][self.PCAP.currentIndex()]
+        VEXP = ATTRIBUTES['VEXP'][self.VEXP.currentIndex()]
+        LEXP = ATTRIBUTES['LEXP'][self.LEXP.currentIndex()]
+        MODP = ATTRIBUTES['MODP'][self.MODP.currentIndex()]
+        TOOL = ATTRIBUTES['TOOL'][self.TOOL.currentIndex()]
+        SCED = ATTRIBUTES['SCED'][self.SCED.currentIndex()]
 
         return RELY * DATA * CPLX * TIME * STOR * VIRT * TURN * ACAP * AEXP * PCAP * VEXP * LEXP * MODP * TOOL * SCED
 
     def PM(self):
         mode = self.project_mode.currentIndex()
         SIZE = float(self.SIZE.text())
-
-        return TYPE['c1'][mode] * self.eaf() * (SIZE ** TYPE['p1'][mode])
+        return TYPE['C1'][mode] * self.eaf() * (SIZE ** TYPE['p1'][mode])
 
     def TM(self):
         mode = self.project_mode.currentIndex()
 
-        return TYPE['c2'][mode] * (self.PM() ** TYPE['p2'][mode])
+        return TYPE['C2'][mode] * (self.PM() ** TYPE['p2'][mode])
 
     def calculate_project(self):
         try:
@@ -163,29 +158,29 @@ class MainWindow(QDialog):
                 x = [1, 2, 3]
 
                 for i in range(1, 4):
-                    y_acap_pm.append(PM(TYPE['c1'][t], TYPE['p1'][t], calc_EAF([
-                        params_table['ACAP'][i],
-                        params_table['CPLX'][cplx]
+                    y_acap_pm.append(PM(TYPE['C1'][t], TYPE['p1'][t], calc_EAF([
+                        ATTRIBUTES['ACAP'][i],
+                        ATTRIBUTES['CPLX'][cplx]
                     ]), 100))
-                    y_acap_tm.append(TM(TYPE['c2'][t], TYPE['p2'][t], y_acap_pm[-1]))
+                    y_acap_tm.append(TM(TYPE['C2'][t], TYPE['p2'][t], y_acap_pm[-1]))
 
-                    y_aexp_pm.append(PM(TYPE['c1'][t], TYPE['p1'][t], calc_EAF([
-                        params_table['AEXP'][i],
-                        params_table['CPLX'][cplx]
+                    y_aexp_pm.append(PM(TYPE['C1'][t], TYPE['p1'][t], calc_EAF([
+                        ATTRIBUTES['AEXP'][i],
+                        ATTRIBUTES['CPLX'][cplx]
                     ]), 100))
-                    y_aexp_tm.append(TM(TYPE['c2'][t], TYPE['p2'][t], y_aexp_pm[-1]))
+                    y_aexp_tm.append(TM(TYPE['C2'][t], TYPE['p2'][t], y_aexp_pm[-1]))
 
-                    y_pcap_pm.append(PM(TYPE['c1'][t], TYPE['p1'][t], calc_EAF([
-                        params_table['PCAP'][i],
-                        params_table['CPLX'][cplx]
+                    y_pcap_pm.append(PM(TYPE['C1'][t], TYPE['p1'][t], calc_EAF([
+                        ATTRIBUTES['PCAP'][i],
+                        ATTRIBUTES['CPLX'][cplx]
                     ]), 100))
-                    y_pcap_tm.append(TM(TYPE['c2'][t], TYPE['p2'][t], y_pcap_pm[-1]))
+                    y_pcap_tm.append(TM(TYPE['C2'][t], TYPE['p2'][t], y_pcap_pm[-1]))
 
-                    y_lexp_pm.append(PM(TYPE['c1'][t], TYPE['p1'][t], calc_EAF([
-                        params_table['LEXP'][i],
-                        params_table['CPLX'][cplx]
+                    y_lexp_pm.append(PM(TYPE['C1'][t], TYPE['p1'][t], calc_EAF([
+                        ATTRIBUTES['LEXP'][i],
+                        ATTRIBUTES['CPLX'][cplx]
                     ]), 100))
-                    y_lexp_tm.append(TM(TYPE['c2'][t], TYPE['p2'][t], y_lexp_pm[-1]))
+                    y_lexp_tm.append(TM(TYPE['C2'][t], TYPE['p2'][t], y_lexp_pm[-1]))
 
                 plt.suptitle(f'PM, TM; mode={t}, CPLX={cplx}')
                 plt.subplot(121)
