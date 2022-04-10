@@ -32,6 +32,7 @@ def plot(cplx):
         y_aexp_pm = []
         y_pcap_pm = []
         y_lexp_pm = []
+
         y_acap_tm = []
         y_aexp_tm = []
         y_pcap_tm = []
@@ -66,11 +67,12 @@ def plot(cplx):
 
         plt.suptitle(f'PM, TM; mode={t}, CPLX={cplx}')
         plt.subplot(121)
-        line1, = plt.plot(x, y_acap_pm, 'r', label='ACAP')
-        line2, = plt.plot(x, y_aexp_pm, 'g', label='AEXP')
-        line3, = plt.plot(x, y_pcap_pm, 'b', label='PCAP')
-        line4, = plt.plot(x, y_lexp_pm, 'y', label='LEXP')
+        linePm1, = plt.plot(x, y_acap_pm, 'r', label='ACAP')
+        linePm2, = plt.plot(x, y_aexp_pm, 'g', label='AEXP')
+        linePm3, = plt.plot(x, y_pcap_pm, 'b', label='PCAP')
+        linePm4, = plt.plot(x, y_lexp_pm, 'y', label='LEXP')
+
         plt.subplot(122)
         plt.plot(x, y_acap_tm, 'r', x, y_aexp_tm, 'g', x, y_pcap_tm, 'b', x, y_lexp_tm, 'y')
-        plt.legend(handles=[line1, line2, line3, line4])
+        plt.legend(handles=[linePm1, linePm2, linePm3, linePm4])
         plt.show()

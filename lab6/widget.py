@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QDialog, QHeaderView, QTableWidgetItem
 class MainWindow(QDialog):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.ui = uic.loadUi('./lab6.ui', self)
+        self.ui = uic.loadUi('widget.ui', self)
 
         self.RELY: QComboBox = self.ui.comboBox_1
         self.DATA: QComboBox = self.ui.comboBox_2
@@ -25,33 +25,12 @@ class MainWindow(QDialog):
         self.MODP: QComboBox = self.ui.comboBox_13
         self.TOOL: QComboBox = self.ui.comboBox_14
         self.SCED: QComboBox = self.ui.comboBox_15
-
-        self.RELY.currentIndexChanged.connect(self.calculate_project)
-        self.DATA.currentIndexChanged.connect(self.calculate_project)
-        self.CPLX.currentIndexChanged.connect(self.calculate_project)
-        self.TIME.currentIndexChanged.connect(self.calculate_project)
-        self.STOR.currentIndexChanged.connect(self.calculate_project)
-        self.VIRT.currentIndexChanged.connect(self.calculate_project)
-        self.TURN.currentIndexChanged.connect(self.calculate_project)
-        self.ACAP.currentIndexChanged.connect(self.calculate_project)
-        self.AEXP.currentIndexChanged.connect(self.calculate_project)
-        self.PCAP.currentIndexChanged.connect(self.calculate_project)
-        self.VEXP.currentIndexChanged.connect(self.calculate_project)
-        self.LEXP.currentIndexChanged.connect(self.calculate_project)
-        self.MODP.currentIndexChanged.connect(self.calculate_project)
-        self.TOOL.currentIndexChanged.connect(self.calculate_project)
-        self.SCED.currentIndexChanged.connect(self.calculate_project)
-
+        
         self.size: QLineEdit = self.ui.sizeEdit
-        self.size.textEdited.connect(self.calculate_project)
-
         self.type: QComboBox = self.ui.comboBox_16
-        self.type.currentIndexChanged.connect(self.calculate_project)
 
         self.ui.wbsTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.classicTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-
-        self.calculate_project()
 
 
     def fill_table(self, pm, tm, pm_clean, tm_clean):
@@ -96,7 +75,21 @@ class MainWindow(QDialog):
         return RELY * DATA * CPLX * TIME * STOR * VIRT * TURN * ACAP * AEXP * PCAP * VEXP * LEXP * MODP * TOOL * SCED
 
 
+    
+    @pyqtSlot(name="on_calculateButton_clicked")
     def calculate_project(self):
+        pm, tm, pm_clean, tm_clean = self.calculate()
+
+        self.ui.pmLine.setText(str(pm))
+        self.ui.tmLine.setText(str(tm))
+        self.fill_table(pm, tm, pm_clean, tm_clean)
+
+        plot(0)
+        #plot(2)
+        #plot(4)
+
+
+    def calculate(self):
         try:
             mode = self.type.currentIndex()
             size = float(self.size.text())
@@ -111,19 +104,9 @@ class MainWindow(QDialog):
         pm = round(pm_clean * 1.08, 2)
         tm = round(tm_clean * 1.36, 2)
 
-        self.ui.pmLabel.setText(f'Трудозатраты: {pm}')
-        self.ui.tmLabel.setText(f'Время: {tm}')
-
-        self.fill_table(pm, tm, pm_clean, tm_clean)
+        return pm, tm, pm_clean, tm_clean
 
 
     @pyqtSlot(name="on_barButton_clicked")
     def bar_clicked(self):
         plot_bar(self.ui.classicTable)    
-
-
-    @pyqtSlot(name="on_task1Button_clicked")
-    def task_clicked(self):
-        #plot(0)
-        #plot(2)
-        plot(4)
