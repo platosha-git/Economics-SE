@@ -23,6 +23,7 @@ def plot_bar(table):
     x = [i + 1 for i in range(len(y))]
 
     plt.bar(x, y)
+    plt.grid()
     plt.show()
 
 
