@@ -84,7 +84,7 @@ class MainWindow(QDialog):
         self.ui.tmLine.setText(str(tm))
         self.fill_table(pm, tm, pm_clean, tm_clean)
 
-        plot(0)
+        plot(self.type.currentIndex(), self.MODP.currentIndex(), self.TOOL.currentIndex())
         #plot(2)
         #plot(4)
 
