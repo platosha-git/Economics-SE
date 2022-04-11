@@ -639,11 +639,11 @@
          <string>Номинальный</string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
+          <string>Номинальный</string>
          </property>
         </item>
         <item>
@@ -653,17 +653,7 @@
         </item>
         <item>
          <property name="text">
-          <string>Номинальный</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Низкий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Очень низкий</string>
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -674,11 +664,11 @@
          <string>Номинальный</string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
+          <string>Номинальный</string>
          </property>
         </item>
         <item>
@@ -688,17 +678,7 @@
         </item>
         <item>
          <property name="text">
-          <string>Номинальный</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Низкий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Очень низкий</string>
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -709,16 +689,11 @@
          <string>Номинальный</string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
+          <string>Низкий</string>
          </property>
         </item>
         <item>
@@ -728,12 +703,12 @@
         </item>
         <item>
          <property name="text">
-          <string>Низкий</string>
+          <string>Высокий</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -744,16 +719,11 @@
          <string>Номинальный</string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
+          <string>Низкий</string>
          </property>
         </item>
         <item>
@@ -763,12 +733,12 @@
         </item>
         <item>
          <property name="text">
-          <string>Низкий</string>
+          <string>Высокий</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -843,17 +813,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -863,7 +823,17 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -878,17 +848,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -898,7 +858,17 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -913,17 +883,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -933,7 +893,17 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -948,17 +918,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -968,7 +928,12 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
          </property>
         </item>
        </widget>
@@ -983,17 +948,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -1003,7 +958,12 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
          </property>
         </item>
        </widget>
@@ -1064,17 +1024,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -1084,7 +1034,17 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -1095,16 +1055,11 @@
          <string>Номинальный</string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>1</number>
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
+          <string>Низкий</string>
          </property>
         </item>
         <item>
@@ -1114,12 +1069,12 @@
         </item>
         <item>
          <property name="text">
-          <string>Низкий</string>
+          <string>Высокий</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -1134,17 +1089,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -1154,7 +1099,17 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -1215,17 +1170,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -1235,7 +1180,17 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -1250,17 +1205,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -1270,7 +1215,17 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>
@@ -1285,17 +1240,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Очень высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Высокий</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Номинальный</string>
+          <string>Очень низкий</string>
          </property>
         </item>
         <item>
@@ -1305,7 +1250,17 @@
         </item>
         <item>
          <property name="text">
-          <string>Очень низкий</string>
+          <string>Номинальный</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Высокий</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Очень высокий</string>
          </property>
         </item>
        </widget>

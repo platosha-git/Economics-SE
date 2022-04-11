@@ -85,8 +85,6 @@ class MainWindow(QDialog):
         self.fill_table(pm, tm, pm_clean, tm_clean)
 
         plot(self.type.currentIndex(), self.MODP.currentIndex(), self.TOOL.currentIndex())
-        #plot(2)
-        #plot(4)
 
 
     def calculate(self):
