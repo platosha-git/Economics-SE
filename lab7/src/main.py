@@ -1,18 +1,16 @@
 import sys
-import math
-from functools import reduce
-from PyQt5 import uic, QtCore
+#import math
+#from functools import reduce
+from parameters import *
+from PyQt5 import uic#, QtCore
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow, QApplication, QLineEdit, QComboBox, QLabel, QSpinBox
-
-QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
-QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.ui = uic.loadUi("lab7.ui", self)
+        self.ui = uic.loadUi("widget.ui", self)
 
         self.tab1 = self.ui.tabWidget.widget(0)
         self.tab2 = self.ui.tabWidget.widget(1)
@@ -23,11 +21,11 @@ class MainWindow(QMainWindow):
         self.ILFQty: QLineEdit = self.tab1.findChild(QLineEdit, 'ILFEdit')
         self.EIFQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EIFEdit')
 
-        self.EIDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_1')
-        self.EODif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_2')
-        self.EQDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_3')
-        self.ILFDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_4')
-        self.EIFDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_5')
+        self.EIDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_16')
+        self.EODif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_17')
+        self.EQDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_18')
+        self.ILFDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_19')
+        self.EIFDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_20')
 
         self.EIRes: QLabel = self.tab1.findChild(QLabel, 'EILabel')
         self.EORes: QLabel = self.tab1.findChild(QLabel, 'EOLabel')
@@ -38,7 +36,7 @@ class MainWindow(QMainWindow):
 
         self.sysParams = []
         for i in range(1, 15):
-            self.sysParams.append(self.tab1.findChild(QSpinBox, 'spinBox_' + str(i)))
+            self.sysParams.append(self.tab1.findChild(QComboBox, 'comboBox_' + str(i)))
 
         self.ASMPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'ASMEdit')
         self.CPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CEdit')
@@ -106,7 +104,7 @@ class MainWindow(QMainWindow):
         self.p = 0
 
     def get_sys_params(self):
-        return list(map(lambda sb: sb.value(), self.sysParams))
+        return list(map(lambda sb: sb.currentIndex(), self.sysParams))
 
     def get_lang_percentages(self):
         return {
@@ -226,7 +224,7 @@ class MainWindow(QMainWindow):
 
         for lang in ['ASM', 'C', 'Cobol', 'Fortran', 'Pascal', 'CPP', 'Java', 'CSharp', 'Ada', 'SQL', 'VCPP', 'Delphi',
             'Perl', 'Prolog']:
-            self.LOC += normFP * (float(languages[lang]) / 100.0) * language_fp_table[lang]
+            self.LOC += normFP * (float(languages[lang]) / 100.0) * LANGUAGE_FP[lang]
 
         self.set_fp_results(EIResult, EOResult, EQResult, ILFResult, EIFResult, FP)
         self.set_calculate_fp_results(round(normFP, 2), FP, int(self.LOC))
@@ -235,11 +233,11 @@ class MainWindow(QMainWindow):
     def calculate_p(self):
         power_params = self.get_power_params()
 
-        PREC = power_params_table['PREC'][power_params['PREC']]
-        FLEX = power_params_table['FLEX'][power_params['FLEX']]
-        RESL = power_params_table['RESL'][power_params['RESL']]
-        TEAM = power_params_table['TEAM'][power_params['TEAM']]
-        PMAT = power_params_table['PMAT'][power_params['PMAT']]
+        PREC = DEGREE_FACTOR['PREC'][power_params['PREC']]
+        FLEX = DEGREE_FACTOR['FLEX'][power_params['FLEX']]
+        RESL = DEGREE_FACTOR['RESL'][power_params['RESL']]
+        TEAM = DEGREE_FACTOR['TEAM'][power_params['TEAM']]
+        PMAT = DEGREE_FACTOR['PMAT'][power_params['PMAT']]
 
         result = PREC + FLEX + RESL + TEAM + PMAT
         self.p = result / 100 + 1.01
@@ -252,13 +250,13 @@ class MainWindow(QMainWindow):
         arch_params = self.get_arch_params()
         arch_params_values = []
         
-        arch_params_values.append(labor_factor_table['PERS'][arch_params[0]])
-        arch_params_values.append(labor_factor_table['RCPX'][arch_params[1]])
-        arch_params_values.append(labor_factor_table['RUSE'][arch_params[2]])
-        arch_params_values.append(labor_factor_table['PDIF'][arch_params[3]])
-        arch_params_values.append(labor_factor_table['PREX'][arch_params[4]])
-        arch_params_values.append(labor_factor_table['FCIL'][arch_params[5]])
-        arch_params_values.append(labor_factor_table['SCED'][arch_params[6]])
+        arch_params_values.append(LABOR_FACTOR['PERS'][arch_params[0]])
+        arch_params_values.append(LABOR_FACTOR['RCPX'][arch_params[1]])
+        arch_params_values.append(LABOR_FACTOR['RUSE'][arch_params[2]])
+        arch_params_values.append(LABOR_FACTOR['PDIF'][arch_params[3]])
+        arch_params_values.append(LABOR_FACTOR['PREX'][arch_params[4]])
+        arch_params_values.append(LABOR_FACTOR['FCIL'][arch_params[5]])
+        arch_params_values.append(LABOR_FACTOR['SCED'][arch_params[6]])
 
         labor = round(reduce(lambda x, y: x * y, arch_params_values) * 2.45 * math.pow(self.LOC / 1000.0, self.p))
         time = round(3 * math.pow(labor, 0.33 + 0.2 * (self.p - 1.01)))
