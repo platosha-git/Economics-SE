@@ -2,8 +2,7 @@ from functools import reduce
 from base import *
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QMainWindow, QLineEdit, QComboBox, QLabel, QSpinBox
-
+from PyQt5.QtWidgets import QMainWindow, QLineEdit, QComboBox, QLabel
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
