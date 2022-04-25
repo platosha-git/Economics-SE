@@ -698,7 +698,7 @@
          </rect>
         </property>
         <property name="title">
-         <string>Ситсемные параметры приложения</string>
+         <string>Системные параметры приложения</string>
         </property>
         <widget class="QWidget" name="gridLayoutWidget">
          <property name="geometry">

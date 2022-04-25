@@ -1,7 +1,6 @@
-import math
 from functools import reduce
-from parameters import *
-from PyQt5 import uic#, QtCore
+from base import *
+from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow, QLineEdit, QComboBox, QLabel, QSpinBox
 
@@ -14,43 +13,13 @@ class MainWindow(QMainWindow):
         self.tab1 = self.ui.tabWidget.widget(0)
         self.tab2 = self.ui.tabWidget.widget(1)
 
-        self.EIQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EIEdit')
-        self.EOQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EOEdit')
-        self.EQQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EQEdit')
-        self.ILFQty: QLineEdit = self.tab1.findChild(QLineEdit, 'ILFEdit')
-        self.EIFQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EIFEdit')
-
-        self.EIDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_16')
-        self.EODif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_17')
-        self.EQDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_18')
-        self.ILFDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_19')
-        self.EIFDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_20')
-
-        self.EIRes: QLabel = self.tab1.findChild(QLabel, 'EILabel')
-        self.EORes: QLabel = self.tab1.findChild(QLabel, 'EOLabel')
-        self.EQRes: QLabel = self.tab1.findChild(QLabel, 'EQLabel')
-        self.ILFRes: QLabel = self.tab1.findChild(QLabel, 'ILFLabel')
-        self.EIFRes: QLabel = self.tab1.findChild(QLabel, 'EIFLabel')
-        self.TFPRes: QLabel = self.tab1.findChild(QLabel, 'ResLabel')
+        self.get_func_params()
 
         self.sysParams = []
         for i in range(1, 15):
             self.sysParams.append(self.tab1.findChild(QComboBox, 'comboBox_' + str(i)))
 
-        self.ASMPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'ASMEdit')
-        self.CPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CEdit')
-        self.CobolPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CobolEdit')
-        self.FortranPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'FortranEdit')
-        self.PascalPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'PascalEdit')
-        self.CPPPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CPPEdit')
-        self.JavaPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'JavaEdit')
-        self.CSharpPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CSharpEdit')
-        self.AdaPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'AdaEdit')
-        self.SQLPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'SQLEdit')
-        self.VCPPPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'VCPPEdit')
-        self.DelphiPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'DelphiEdit')
-        self.PerlPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'PerlEdit')
-        self.PrologPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'PrologEdit')
+        self.get_lang_params()
 
         self.VAFRes: QLineEdit = self.tab1.findChild(QLineEdit, 'VAFLabel')
         self.NormFPRes: QLineEdit = self.tab1.findChild(QLineEdit, 'NormFPLabel')
@@ -103,6 +72,46 @@ class MainWindow(QMainWindow):
         self.LOC = 0
         self.calculate_LOC()
         self.p = 0
+        self.SALARY = SALARY
+
+
+    def get_func_params(self):
+        self.EIQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EIEdit')
+        self.EOQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EOEdit')
+        self.EQQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EQEdit')
+        self.ILFQty: QLineEdit = self.tab1.findChild(QLineEdit, 'ILFEdit')
+        self.EIFQty: QLineEdit = self.tab1.findChild(QLineEdit, 'EIFEdit')
+
+        self.EIDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_16')
+        self.EODif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_17')
+        self.EQDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_18')
+        self.ILFDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_19')
+        self.EIFDif: QComboBox = self.tab1.findChild(QComboBox, 'comboBox_20')
+
+        self.EIRes: QLabel = self.tab1.findChild(QLabel, 'EILabel')
+        self.EORes: QLabel = self.tab1.findChild(QLabel, 'EOLabel')
+        self.EQRes: QLabel = self.tab1.findChild(QLabel, 'EQLabel')
+        self.ILFRes: QLabel = self.tab1.findChild(QLabel, 'ILFLabel')
+        self.EIFRes: QLabel = self.tab1.findChild(QLabel, 'EIFLabel')
+        self.TFPRes: QLabel = self.tab1.findChild(QLabel, 'ResLabel')
+
+
+    def get_lang_params(self):
+        self.ASMPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'ASMEdit')
+        self.CPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CEdit')
+        self.CobolPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CobolEdit')
+        self.FortranPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'FortranEdit')
+        self.PascalPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'PascalEdit')
+        self.CPPPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CPPEdit')
+        self.JavaPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'JavaEdit')
+        self.CSharpPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'CSharpEdit')
+        self.AdaPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'AdaEdit')
+        self.SQLPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'SQLEdit')
+        self.VCPPPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'VCPPEdit')
+        self.DelphiPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'DelphiEdit')
+        self.PerlPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'PerlEdit')
+        self.PrologPercent: QLineEdit = self.tab1.findChild(QLineEdit, 'PrologEdit')
+
 
     def get_sys_params(self):
         return list(map(lambda sb: sb.currentIndex(), self.sysParams))
@@ -157,50 +166,11 @@ class MainWindow(QMainWindow):
         self.FPRes.setText(str(FP))
         self.LOCRes.setText(str(LOC))
 
-    def get_power_params(self):
-        return {
-            'PREC': self.PREC.currentIndex(),
-            'FLEX': self.FLEX.currentIndex(),
-            'RESL': self.RESL.currentIndex(),
-            'TEAM': self.TEAM.currentIndex(),
-            'PMAT': self.PMAT.currentIndex(),
-        }
-
-    def set_power_result(self, P):
-        self.Power.setText(str(P))
-
-    def get_arch_params(self):
-        return list(map(lambda sb: sb.currentIndex(), self.arch))
-
-    def get_avg_salary(self):
-        #return float(self.avgSalary.text())
-        return 75000
-
-    def set_arch_results(self, labor, time, budget):
-        self.archLab.setText(str(labor))
-        self.archTime.setText(str(time))
-        self.archBudget.setText(str(budget))
-
     def get_screen_qty(self):
         return list(map(lambda le: float(le.text()), self.screenQty))
 
     def get_report_qty(self):
         return list(map(lambda le: float(le.text()), self.reportQty))
-
-    def get_3gen_qty(self):
-        return float(self.gen3Qty.text())
-
-    def get_ruse_percent(self):
-        return float(self.RUSE.text())
-
-    def get_experience_level(self):
-        return self.EXP.currentIndex()
-
-    def set_comp_results(self, labor, time, budget):
-        self.compLab.setText(str(labor))
-        self.compTime.setText(str(time))
-        self.compBudget.setText(str(budget))
-
 
     def calculate_LOC(self):
         fp_levels = self.get_fp_levels()
@@ -229,6 +199,9 @@ class MainWindow(QMainWindow):
             self.LOC += AFPC * (float(languages[lang]) / 100.0) * LANGUAGE_FP[lang]
 
 
+######################
+# Функциональные точки
+######################
     @pyqtSlot(name='on_calculateButton_clicked')
     def calculate_fp(self):
         self.LOC = 0
@@ -250,16 +223,21 @@ class MainWindow(QMainWindow):
         EIFResult = int(fp_qty['EIF']) * EIFLevel
         UFPC = EIResult + EOResult + EQResult + ILFResult + EIFResult
 
-        VAF = 0.65 + 0.01 * sum(sys_params)
-        AFPC = UFPC * VAF
-
-        for lang in ['ASM', 'C', 'Cobol', 'Fortran', 'Pascal', 'CPP', 'Java', 'CSharp', 'Ada', 'SQL', 'VCPP', 'Delphi',
-            'Perl', 'Prolog']:
-            self.LOC += AFPC * (float(languages[lang]) / 100.0) * LANGUAGE_FP[lang]
+        VAF = calculate_VAF(sys_params)
+        AFPC = calculate_AFPC(VAF, UFPC)
+        self.LOC += calculate_LOC(AFPC, languages)
 
         self.set_fp_results(EIResult, EOResult, EQResult, ILFResult, EIFResult, UFPC)
         self.set_calculate_fp_results(VAF, round(AFPC, 2), UFPC, int(self.LOC))
 
+    def get_power_params(self):
+        return {
+            'PREC': self.PREC.currentIndex(),
+            'FLEX': self.FLEX.currentIndex(),
+            'RESL': self.RESL.currentIndex(),
+            'TEAM': self.TEAM.currentIndex(),
+            'PMAT': self.PMAT.currentIndex(),
+        }
 
     @pyqtSlot(name='on_pCalculateButton_clicked')
     def calculate_p(self):
@@ -274,15 +252,62 @@ class MainWindow(QMainWindow):
         result = PREC + FLEX + RESL + TEAM + PMAT
         self.p = result / 100 + 1.01
         
-        self.set_power_result(self.p)
+        self.Power.setText(str(self.p))
 
+
+#############################
+# Метод композиции приложения
+#############################
+    def get_forms(self):
+        easy_forms = self.get_screen_qty()[0]
+        medium_forms = self.get_screen_qty()[1]
+        hard_forms = self.get_screen_qty()[2]
+        return [easy_forms, medium_forms, hard_forms]
+
+    def get_reports(self):
+        easy_report = self.get_report_qty()[0]
+        medium_report = self.get_report_qty()[1]
+        hard_report = self.get_report_qty()[2]
+        return [easy_report, medium_report, hard_report]
+
+    def set_comp_results(self, labor, time, budget):
+        self.compLab.setText(str(labor))
+        self.compTime.setText(str(time))
+        self.compBudget.setText(str(budget))
+
+    @pyqtSlot(name='on_compCalculateButton_clicked')
+    def calculate_comp(self):
+        RUSE = float(self.RUSE.text())
+        PROD = experience_level[self.EXP.currentIndex()]
+        
+        forms = self.get_forms()
+        reports = self.get_reports()
+        modules = float(self.gen3Qty.text())
+
+        NOP = calculate_NOP(forms, reports, modules)
+        labor = calculate_compLABOR(NOP, RUSE, PROD)
+        time = calculate_compTIME(labor, self.p)
+        budget = calculate_budget(self.SALARY, labor)
+
+        self.set_comp_results(labor, time, budget)
+
+
+#############################
+# Метод ранней архитектуры
+#############################
+    def get_arch_params(self):
+        return list(map(lambda sb: sb.currentIndex(), self.arch))
+    
+    def set_arch_results(self, labor, time, budget):
+        self.archLab.setText(str(labor))
+        self.archTime.setText(str(time))
+        self.archBudget.setText(str(budget))
 
     @pyqtSlot(name='on_archCalculateButton_clicked')
     def calculate_arch(self):
-        avg_salary = self.get_avg_salary()
         arch_params = self.get_arch_params()
-        arch_params_values = []
         
+        arch_params_values = []
         arch_params_values.append(LABOR_FACTOR['PERS'][arch_params[0]])
         arch_params_values.append(LABOR_FACTOR['RCPX'][arch_params[1]])
         arch_params_values.append(LABOR_FACTOR['RUSE'][arch_params[2]])
@@ -291,32 +316,9 @@ class MainWindow(QMainWindow):
         arch_params_values.append(LABOR_FACTOR['FCIL'][arch_params[5]])
         arch_params_values.append(LABOR_FACTOR['SCED'][arch_params[6]])
 
-        labor = round(reduce(lambda x, y: x * y, arch_params_values) * 2.45 * math.pow(self.LOC / 1000.0, self.p))
-        time = round(3 * math.pow(labor, 0.33 + 0.2 * (self.p - 1.01)))
-        budget = avg_salary * labor
+        labor = calculate_archLABOR(reduce(lambda x, y: x * y, arch_params_values), 
+                                    self.LOC / 1000.0, self.p)
+        time = calculate_archTIME(labor, self.p)
+        budget = calculate_budget(self.SALARY, labor)
 
         self.set_arch_results(labor, time, budget)
-      
-
-    @pyqtSlot(name='on_compCalculateButton_clicked')
-    def calculate_comp(self):
-        avg_salary = self.get_avg_salary()
-        ruse = self.get_ruse_percent()
-        exp = experience_level[self.get_experience_level()]
-        
-        easy_forms = self.get_screen_qty()[0]
-        medium_forms = self.get_screen_qty()[1]
-        hard_forms = self.get_screen_qty()[2]
-
-        easy_report = self.get_report_qty()[0]
-        medium_report = self.get_report_qty()[1]
-        hard_report = self.get_report_qty()[2]
-
-        modules = self.get_3gen_qty()
-
-        points = easy_forms + medium_forms * 2 + hard_forms * 3 + easy_report * 2 + medium_report * 5 + hard_report * 8 + modules * 10
-        labor = round((points * (100 - ruse) / 100) / exp)
-        time = round(3 * math.pow(labor, 0.33 + 0.2 * (self.p - 1.01)))
-        budget = avg_salary * labor
-
-        self.set_comp_results(labor, time, budget)
