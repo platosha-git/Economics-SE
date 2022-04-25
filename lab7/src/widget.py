@@ -101,6 +101,7 @@ class MainWindow(QMainWindow):
         self.avgSalary: QLineEdit = self.tab2.findChild(QLineEdit, 'avgSalaryEdit')
 
         self.LOC = 0
+        self.calculate_LOC()
         self.p = 0
 
     def get_sys_params(self):
@@ -172,7 +173,8 @@ class MainWindow(QMainWindow):
         return list(map(lambda sb: sb.currentIndex(), self.arch))
 
     def get_avg_salary(self):
-        return float(self.avgSalary.text())
+        #return float(self.avgSalary.text())
+        return 75000
 
     def set_arch_results(self, labor, time, budget):
         self.archLab.setText(str(labor))
@@ -198,6 +200,33 @@ class MainWindow(QMainWindow):
         self.compLab.setText(str(labor))
         self.compTime.setText(str(time))
         self.compBudget.setText(str(budget))
+
+
+    def calculate_LOC(self):
+        fp_levels = self.get_fp_levels()
+        fp_qty = self.get_fp_qty()
+        sys_params = self.get_sys_params()
+        languages = self.get_lang_percentages()
+
+        EILevel = params_level_table['EI'][fp_levels['EI']]
+        EOLevel = params_level_table['EO'][fp_levels['EO']]
+        EQLevel = params_level_table['EQ'][fp_levels['EQ']]
+        ILFLevel = params_level_table['ILF'][fp_levels['ILF']]
+        EIFLevel = params_level_table['EIF'][fp_levels['EIF']]
+
+        EIResult = int(fp_qty['EI']) * EILevel
+        EOResult = int(fp_qty['EO']) * EOLevel
+        EQResult = int(fp_qty['EQ']) * EQLevel
+        ILFResult = int(fp_qty['ILF']) * ILFLevel
+        EIFResult = int(fp_qty['EIF']) * EIFLevel
+        UFPC = EIResult + EOResult + EQResult + ILFResult + EIFResult
+
+        VAF = 0.65 + 0.01 * sum(sys_params)
+        AFPC = UFPC * VAF
+
+        for lang in ['ASM', 'C', 'Cobol', 'Fortran', 'Pascal', 'CPP', 'Java', 'CSharp', 'Ada', 'SQL', 'VCPP', 'Delphi',
+            'Perl', 'Prolog']:
+            self.LOC += AFPC * (float(languages[lang]) / 100.0) * LANGUAGE_FP[lang]
 
 
     @pyqtSlot(name='on_calculateButton_clicked')
